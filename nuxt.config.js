@@ -244,20 +244,8 @@ export default {
   },
   axios: {
     credentials: false,
-    proxy: true // Can be also an object with default options
-  },
-  proxy: {
-    '/base/': {
-      target: 'http://185.192.97.21:8086/service/',
-      pathRewrite: { '^/base/': '' },
-      changeOrigin: true,
-    },
-    '/branch/': {
-      target: 'http://185.192.97.21:8086/main/',
-      pathRewrite: { '^/branch/': '' },
-      changeOrigin: true,
-    },
-  },
+    
+ 
   auth: {
     redirect: {
       login: '/login',
