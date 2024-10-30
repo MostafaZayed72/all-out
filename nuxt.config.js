@@ -245,20 +245,9 @@ export default {
     ]
   },
   axios: {
-    baseURL: process.env.BASE_URL || 'http://192.168.1.1'
-  },
-  proxy: {
-    '/base/': {
-      target: 'http://185.192.97.21:8086/service/',
-      pathRewrite: { '^/base/': '' },
-      changeOrigin: true,
+    baseURL: 'https://demo2.createcompany.online',
     },
-    '/branch/': {
-      target: 'http://185.192.97.21:8086/main/',
-      pathRewrite: { '^/branch/': '' },
-      changeOrigin: true,
-    },
-  },
+  
   auth: {
     redirect: {
       login: '/login',
