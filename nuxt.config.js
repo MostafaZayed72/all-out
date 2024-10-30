@@ -3,10 +3,6 @@ const routerBase = process.env.DEPLOY_ENV === 'GH_PAGES' ? '/panel/' : '/';
 const fs = require('fs');
 const path = require('path');
 export default {
-  target: 'static',
-  generate: {
-    dir: 'dist'
-  },
   // router: {
   //   middleware: {
   //     '/profile': 'auth',
@@ -170,7 +166,9 @@ export default {
     id: 'G-1J0NP3PJ3X'
   },
   publicRuntimeConfig: {
-    baseURL: process.env.BASE_URL
+    googleAnalytics: {
+      id: 'G-1J0NP3PJ3X'
+    }
   },
 
   // Modules: https://go.nuxtjs.dev/config-modules
@@ -245,9 +243,21 @@ export default {
     ]
   },
   axios: {
-    baseURL: 'https://demo2.createcompany.online',
+    credentials: false,
+    proxy: true // Can be also an object with default options
+  },
+  proxy: {
+    '/base/': {
+      target: 'http://185.192.97.21:8086/service/',
+      pathRewrite: { '^/base/': '' },
+      changeOrigin: true,
     },
-  
+    '/branch/': {
+      target: 'http://185.192.97.21:8086/main/',
+      pathRewrite: { '^/branch/': '' },
+      changeOrigin: true,
+    },
+  },
   auth: {
     redirect: {
       login: '/login',
@@ -278,12 +288,11 @@ export default {
           autoFetch: false
         },
         endpoints: {
-          login: { url: '/api/master-admins/login', method: 'post' },
-          refresh: { url: '/api/master-admins/refresh/?format=web', method: 'post' },
+          login: { url: '/branch/api/master-admins/login', method: 'post' },
+          refresh: { url: '/branch/api/master-admins/refresh/?format=web', method: 'post' },
           user: false,
-          logout: { url: '/api/master-admins/logout', method: 'post' }
-       },
-       
+          logout: { url: '/branch/api/master-admins/logout', method: 'post' }
+        },
         tokenRequired: true,
         tokenType: 'JWT',
       }
