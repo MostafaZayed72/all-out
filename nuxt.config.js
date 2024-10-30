@@ -244,7 +244,8 @@ export default {
   },
   axios: {
     credentials: false,
-    
+   
+  },
  
   auth: {
     redirect: {
