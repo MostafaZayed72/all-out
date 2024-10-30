@@ -170,6 +170,7 @@ export default {
     id: 'G-1J0NP3PJ3X'
   },
   publicRuntimeConfig: {
+      baseURL: process.env.BASE_URL || 'http://192.168.1.1',
     googleAnalytics: {
       id: 'G-1J0NP3PJ3X'
     }
@@ -247,6 +248,7 @@ export default {
     ]
   },
   axios: {
+     baseURL: process.env.BASE_URL || 'http://192.168.1.1',
     credentials: false,
     proxy: true // Can be also an object with default options
   },
