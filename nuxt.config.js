@@ -289,11 +289,12 @@ export default {
           autoFetch: false
         },
         endpoints: {
-          login: { url: '/branch/api/master-admins/login', method: 'post' },
-          refresh: { url: '/branch/api/master-admins/refresh/?format=web', method: 'post' },
+          login: { url: '/api/master-admins/login', method: 'post' },
+          refresh: { url: '/api/master-admins/refresh/?format=web', method: 'post' },
           user: false,
-          logout: { url: '/branch/api/master-admins/logout', method: 'post' }
-        },
+          logout: { url: '/api/master-admins/logout', method: 'post' }
+       },
+       
         tokenRequired: true,
         tokenType: 'JWT',
       }
