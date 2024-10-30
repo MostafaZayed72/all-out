@@ -1,13 +1,12 @@
 {
-    "rewrites": [
-      {
-        "source": "/base/(.*)",
-        "destination": "http://143.198.103.113:8086/service/$1"
-      },
-      {
-        "source": "/branch/(.*)",
-        "destination": "http://143.198.103.113:8086/main/$1"
-      }
-    ]
-  }
-  
+  "rewrites": [
+    {
+      "source": "/base/(.*)",
+      "destination": "http://185.192.97.21:8086/service/$1"
+    },
+    {
+      "source": "/branch/(.*)",
+      "destination": "http://185.192.97.21:8086/main/$1"
+    }
+  ]
+}
