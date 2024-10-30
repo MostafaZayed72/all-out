@@ -1,15 +1,13 @@
 <template>
   <div>
     <div class="row">
-      <div class="mb-3 form-group col-12">
-        <!-- <label>{{ title }} <span class="text-danger">*</span></label> -->
-        <div class="uploadingzone bg-gray-100 h-36" ref="fileform" v-on:click="$refs.file.click()"
-          @dragenter.prevent="ondragenter" @dragover.prevent="ondragenter" @dragleave.prevent="ondragleave"
-          @drop.prevent="ondragleave" :class="{ 'border-blue': isDrag, 'border-gray': !isDrag }">
+      <div class="mb-3 form-group col-12" >
+        <div class="uploadingzone bg-gray-100 h-36" ref="fileform" @click="triggerFileInput"  
+        @dragenter.prevent="ondragenter" @dragover.prevent="ondragenter" @dragleave.prevent="ondragleave"
+        @drop.prevent="ondragleave" :class="{ 'border-blue': isDrag, 'border-gray': !isDrag }">
           <div class="uploaddetails">
             <div class="flex text-center my-auto" style="display: flex; align-items: center;" >
-              <p class="font-pop font-medium text-gray-500" :style="`font-size: ${{ fs }}em` ">
-
+              <p class="font-pop font-medium text-gray-500" >
                 <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="width: 70px;">
                   <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
                   <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
@@ -27,80 +25,42 @@
                 <span style="display: block;" >Or click to select manually</span>
               </div>
               </p>
-            </div>
-
-            <input type="file" ref="file" :multiple="multiple" v-on:change="handleFileUpload()" id="triggered-file"
-              style="display: none" />
+            </div>         
+              <input type="file" ref="fileInputSingle" @change="handleFileSelect" style="display: none"/>
           </div>
         </div>
       </div>
-      <div class="col-12 file-listing-container h-24 flex gap-4" v-if="fileType != 'img' && images != null">
-        <div v-for="(file, key) in images" class="file-listing-file h-24" :key="key + 'preview'">
-          <a class="previewFile h-24" target="_blank" :href="file" v-bind:ref="'preview' + parseInt(key)">
-            <div class="viewIconDiv">
-              <i class="ti ti-eye fs-3 viewIcon"></i>
-            </div>
-            <p style="margin: 5px">Preview</p>
-          </a>
-
-          <div class="remove-container-file">
-            <i class="ti ti-trash fs-6 delete" v-on:click="removeFile(key, true)"></i>
-          </div>
-        </div>
-      </div>
-      <div class="col-12 file-listing-container h-24 flex gap-4" v-if="fileType == 'img' && images != null">
-        <div v-for="(file, key) in images" class="file-listing h-24" :key="'preview' + key">
-          <!-- Ensure file and file.imgPath exist before rendering the img tag -->
-          <img v-if="file && file.imgPath" class="preview h-24" :src="file.imgPath" v-bind:ref="'preview' + parseInt(key)" alt="" />
-          {{ file && file.name ? file.name.slice(0, 50) : '' }}
+    
+      <div class="col-12 file-listing-container h-24 flex gap-4" v-if="imagePreview">
+        <div class="file-listing h-24">
+          <img class="preview h-24" :src="imagePreview" />
           <div class="remove-container">
-            <i class="ti ti-trash fs-3 delete" v-on:click="removeFile(key, true)"></i>
+            <i class="ti ti-trash fs-3 delete" @click="removeImage"></i>
           </div>
-        </div>
-      </div>      <!-- </div> -->
-      <div class="flex relative mt-2" v-if="uploadPercentage > 0">
-        <div class="flex gap-5 mt-2">
-          <progress max="100" class="rounded-full bg-gray-200 h-2 mt-2" :value.prop="uploadPercentage"></progress>
-          <p class="percentageindicator font-pop font-medium text-sm">
-            {{ uploadPercentage }} %
-          </p>
+          <div v-if="isUploading" class="loading-spinner">
+             <div class="spinner"></div>
+          </div>
+      
         </div>
       </div>
-    </div>
+   </div>
   </div>
 </template>
 
 <script>
 import axios from "axios";
+
 export default {
   props: {
-    fs: {
-      type: Number,
-      default: 1.5,
-    },
-    isMultiple: {
-      type: Boolean,
-      default: false,
-    },
-    request: false,
-    fileList: null,
-    upload: null,
-    fileType: {
-      type: String,
-      default: "img",
-    },
-    params: null,
-    multiple: false,
+    imagePath: String,
+    params: String,
   },
   data() {
     return {
-      uploadPercentage: 0,
-      file: null,
+      imagePreview: this.imagePath || null,
       isDrag: false,
-      title: "Image",
-      text: "Drag files here",
-      files: [],
-      images: [],
+      isUploading: false,
+      text: "Drag your image here",
       config: {
         auth: {
           username: "user",
@@ -108,6 +68,11 @@ export default {
         },
       },
     };
+  },
+  watch: {
+    imagePath(newVal) {
+      this.imagePreview = newVal;
+    },
   },
   mounted() {
     if (!process.client) return;
@@ -137,19 +102,12 @@ export default {
       this.$refs.fileform.addEventListener(
         "drop",
         function (e) {
-          for (let i = 0; i < e.dataTransfer.files.length; i++) {
-            this.images.push(e.dataTransfer.files[i]);
-            this.getImagePreviews();
-          }
+            this.imagePreview = URL.createObjectURL(e.dataTransfer.files[0]);
+            this.uploadFile(e.dataTransfer.files[0]);
         }.bind(this)
       );
     }
-    if (!Array.isArray(this.fileList)) this.images = [this.fileList];
-    if (this.params == "Cancelation" || this.params == "Reschedule")
-      this.title = "File";
-    else this.title = "Image";
   },
-  component: {},
   methods: {
     ondragenter() {
       this.text = "You may drop to upload";
@@ -160,105 +118,46 @@ export default {
       this.isDrag = false;
     },
     determineDragAndDropCapable() {
-      /*
-                Create a test element to see if certain events
-                are present that let us do drag and drop.
-              */
       var div = document.createElement("div");
-
-      /*
-                Check to see if the `draggable` event is in the element
-                or the `ondragstart` and `ondrop` events are in the element. If
-                they are, then we have what we need for dragging and dropping files.
-
-                We also check to see if the window has `FormData` and `FileReader` objects
-                present so we can do our AJAX uploading
-              */
       return (
         ("draggable" in div || ("ondragstart" in div && "ondrop" in div)) &&
         "FormData" in window &&
         "FileReader" in window
       );
     },
-    handleFileUpload() {
-      const fileInputRef = this.isMultiple
-        ? "fileInputMultiple"
-        : "fileInputSingle";
-      const fileInput = this.$refs[fileInputRef];
-      this.images = this.$refs.file.files;
-      const uploadFile = (file) => {
-        const formData = new FormData();
-        formData.append("file", file);
-        formData.append("type", this.params);
+    triggerFileInput() {
+      this.$refs.fileInputSingle.click();
+    },
+    handleFileSelect(event) {
+      const file = event.target.files[0];
+      if (file) {
+        this.imagePreview = URL.createObjectURL(file);
+        this.uploadFile(file);
+      }
+    },
+    uploadFile(file) {
+      const formData = new FormData();
+      formData.append("file", file);
+      formData.append("type", this.params);
 
-        return axios.post("/base/files/upload", formData, {
+      this.isUploading = true;
+
+      axios
+        .post("/base/files/upload", formData, {
           ...this.config,
-          onUploadProgress: (progressEvent) => {
-            this.uploadPercentage = Math.round(
-              (progressEvent.loaded * 100) / progressEvent.total
-            );
-          },
+        })
+        .then((response) => {
+          this.isUploading = false;
+          this.$emit("upload", response.data.response.msg);
+        })
+        .catch((error) => {
+          this.isUploading = false;
+          console.error("Upload failed:", error);
         });
-      };
-      const uploadSequentially = async () => {
-        for (let i = 0; i < this.images.length; i++) {
-          try {
-            const response = await uploadFile(this.images[i]);
-            if (response.data.success === true) {
-              this.$toast.success(response.data.messageText).goAway(1500);
-              this.images.push({
-                imgPath: response.data.response.msg,
-                imgName: "Image ",
-              });
-
-              this.$emit("upload", this.file);
-            } else {
-              this.$toast.error("Error").goAway(1500);
-            }
-          } catch (error) {
-            this.$toast.error(error.response.data.messageText).goAway(1500);
-          }
-        }
-      };
-      if (this.upload) {
-        uploadSequentially();
-      } else {
-        this.$emit("upload", this.images);
-      }
-      this.getImagePreviews();
     },
-    removeFile(key, isRequest = false) {
-      if (this.request) {
-        if (this.images) this.images.splice(key, 1);
-      } else {
-        if (this.images.length > 1) this.images.splice(key, 1);
-        else {
-          this.file = null;
-          this.images = [];
-        }
-      }
-    },
-    getImagePreviews() {
-      for (let i = 0; i < this.images.length; i++) {
-        if (/\.(jpe?g|png|gif)$/i.test(this.images[i].name)) {
-          let reader = new FileReader();
-          reader.addEventListener(
-            "load",
-            function () {
-              this.$refs["preview" + parseInt(i)][0].src = reader.result;
-            }.bind(this),
-            false
-          );
-          reader.readAsDataURL(this.images[i]);
-        } else {
-          this.$nextTick(function () {
-            this.$refs["preview" + parseInt(i)][0].src = "/images/file.png";
-          });
-        }
-      }
-    },
-    triggerFile(id) {
-      $(id).click();
+    removeImage() {
+      this.imagePreview = null;
+      this.$emit("upload", null);
     },
   },
 };
@@ -277,7 +176,7 @@ export default {
   position: relative;
 }
 
-.upload-prescription>p {
+.upload-prescription > p {
   font-size: 27px;
   font-family: Poppins-Medium;
   color: #171717;
@@ -351,6 +250,7 @@ export default {
   color: white;
   position: absolute;
   border-radius: 1em;
+  cursor: pointer;
 }
 
 .delete {
@@ -389,5 +289,32 @@ export default {
   height: 1.7em;
   float: left;
   margin: 4px 10px 0 0;
+}
+
+.loading-spinner {
+  position: absolute;
+  top: 100%;
+  display: flex;
+  margin-left: 25%;
+  justify-content: center;
+  align-items: center;
+}
+
+.spinner {
+  border: 4px solid rgba(0, 0, 0, 0.1);
+  border-top: 4px solid #3498db;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }
 </style>

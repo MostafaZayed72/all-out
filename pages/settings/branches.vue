@@ -1,9 +1,7 @@
 <template>
   <div class="body-wrapper">
     <div class="container-fluid">
-      <div
-        class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4"
-      >
+      <div class="card bg-info-subtle shadow-none position-relative overflow-hidden mb-4">
         <div class="card-body px-4 py-3">
           <div class="row align-items-center">
             <div class="col-9">
@@ -13,7 +11,7 @@
                   <li class="breadcrumb-item">
                     <a class="text-muted text-decoration-none" href="/">{{
                       $t("Home")
-                    }}</a>
+                      }}</a>
                   </li>
                   <li class="breadcrumb-item" aria-current="page">
                     {{ $t("Branches") }}
@@ -23,11 +21,7 @@
             </div>
             <div class="col-3">
               <div class="text-center mb-n5">
-                <img
-                  src="/Modernize/images/breadcrumb/ChatBc.png"
-                  alt=""
-                  class="img-fluid mb-n4"
-                />
+                <img src="/Modernize/images/breadcrumb/ChatBc.png" alt="" class="img-fluid mb-n4" />
               </div>
             </div>
           </div>
@@ -41,14 +35,8 @@
           </label>
           <div class="controls">
             <div class="controls">
-              <select
-                @change="filter('country', $event)"
-                name="select"
-                id="select"
-                required=""
-                class="form-control"
-                aria-invalid="false"
-              >
+              <select @change="filter('country', $event)" name="select" id="select" required="" class="form-control"
+                aria-invalid="false">
                 <option value="">All</option>
                 <!-- <option
                   :value="item.id"
@@ -85,67 +73,39 @@
           </div>
         </div> -->
         <div class="mb-3 form-group col-2">
-          <a
-            href="javascript:void(0)"
-            class="btn btn-primary d-flex align-items-center px-3"
-            id="add-notes"
-            style="margin-top: 1.5em"
-          >
+          <a href="javascript:void(0)" class="btn btn-primary d-flex align-items-center px-3" id="add-notes"
+            style="margin-top: 1.5em">
             <i class="ti ti-search me-0 me-md-1 fs-4"></i>
-            <span class="d-none d-md-block font-weight-medium fs-3"
-              >Search</span
-            >
+            <span class="d-none d-md-block font-weight-medium fs-3">Search</span>
           </a>
         </div>
       </form>
-      <ul
-        class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row"
-      >
+      <ul class="nav nav-pills p-3 mb-3 rounded align-items-center card flex-row">
         <li class="nav-item">
-          <a
-            href="javascript:void(0)"
+          <a href="javascript:void(0)"
             class="nav-link note-link d-flex align-items-center justify-content-center active px-3 px-md-3 me-0 me-md-2 text-body-color"
-            id="all-category"
-          >
+            id="all-category">
             <i class="ti ti-list fill-white me-0 me-md-1"></i>
-            <span
-              @click="filter('status', 'all')"
-              class="d-none d-md-block font-weight-medium"
-              >All</span
-            >
+            <span @click="filter('status', 'all')" class="d-none d-md-block font-weight-medium">All</span>
           </a>
         </li>
         <li class="nav-item">
-          <a
-            @click="filter('status', 1)"
-            href="javascript:void(0)"
+          <a @click="filter('status', 1)" href="javascript:void(0)"
             class="nav-link note-link d-flex align-items-center justify-content-center px-3 px-md-3 me-0 me-md-2 text-body-color"
-            id="note-business"
-          >
+            id="note-business">
             <span class="d-none d-md-block font-weight-medium">Active</span>
           </a>
         </li>
         <li class="nav-item">
-          <a
-            @click="filter('status', 0)"
-            href="javascript:void(0)"
+          <a @click="filter('status', 0)" href="javascript:void(0)"
             class="nav-link note-link d-flex align-items-center justify-content-center px-3 px-md-3 me-0 me-md-2 text-body-color"
-            id="note-social"
-          >
+            id="note-social">
             <span class="d-none d-md-block font-weight-medium">Inactive</span>
           </a>
         </li>
-        <li
-          class="nav-item ms-auto row gap-1"
-          style="position: absolute; right: 1em"
-        >
-          <a
-            href="javascript:void(0)"
-            class="btn btn-primary d-flex align-items-center px-2 col-5"
-            style="width: 5em"
-            id="add-vendor"
-            @click="showModal('addVendorModal')"
-          >
+        <li class="nav-item ms-auto row gap-1" style="position: absolute; right: 1em">
+          <a href="javascript:void(0)" class="btn btn-primary d-flex align-items-center px-2 col-5" style="width: 5em"
+            id="add-vendor" @click="showModal('addVendorModal')">
             <i class="ti ti-file-export me-0 me-md-1 fs-4"></i>
             <span class="d-none d-md-block font-weight-medium fs-3">New</span>
           </a>
@@ -155,11 +115,7 @@
       <div class="card card-body">
         <h3>Branches ({{ listing.length }})</h3>
         <div class="table-responsive" v-show="load">
-          <table
-            id=""
-            class="table table-striped table-bordered"
-            style="width: 100%"
-          >
+          <table id="" class="table table-striped table-bordered" style="width: 100%">
             <thead>
               <tr>
                 <th>#</th>
@@ -181,25 +137,15 @@
                 <td>{{ item.descriptionAr }}</td>
                 <td>{{ item.operationHours }}</td>
                 <td>
-                  <span v-if="item.isActive" class="btn btn-sm badge-success"
-                    >Active</span
-                  >
+                  <span v-if="item.isActive" class="btn btn-sm badge-success">Active</span>
                   <span v-else class="btn btn-sm badge-danger">Inactive</span>
                 </td>
                 <td>
                   <div class="action-btn">
-                    <a
-                      @click="get(item.id)"
-                      href="javascript:void(0)"
-                      class="ms-2 btn btn-info btn-sm"
-                    >
+                    <a @click="get(item.id)" href="javascript:void(0)" class="ms-2 btn btn-info btn-sm">
                       Edit
                     </a>
-                    <a
-                      @click="performAction(item.id)"
-                      href="javascript:void(0)"
-                      class="ms-2 btn badge-danger btn-sm"
-                    >
+                    <a @click="performAction(item.id)" href="javascript:void(0)" class="ms-2 btn badge-danger btn-sm">
                       Delete
                     </a>
                   </div>
@@ -221,72 +167,34 @@
           </table>
         </div>
       </div>
-      <div
-        class="modal fade"
-        id="addVendorModal"
-        tabindex="-1"
-        role="dialog"
-        aria-labelledby="addVendorModalTitle"
-        aria-hidden="true"
-      >
-        <div
-          class="modal-dialog modal-dialog-centered"
-          role="document"
-          style="width: 80% !important; max-width: 80% !important"
-        >
+      <div class="modal fade" id="addVendorModal" tabindex="-1" role="dialog" aria-labelledby="addVendorModalTitle"
+        aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document"
+          style="width: 80% !important; max-width: 80% !important">
           <div class="modal-content">
             <div class="modal-header d-flex align-items-center">
               <h5 class="modal-title">{{ $t("Add Branches") }}</h5>
-              <button
-                type="button"
-                class="btn-close"
-                data-bs-dismiss="modal"
-                aria-label="Close"
-              ></button>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
               <div class="add-contact-box">
                 <div class="add-contact-content">
                   <ul class="nav nav-underline" id="myTab" role="tablist">
                     <li class="nav-item" role="presentation">
-                      <a
-                        class="nav-link active"
-                        id="active-tab"
-                        data-bs-toggle="tab"
-                        href="#english"
-                        role="tab"
-                        aria-controls="active"
-                        aria-expanded="true"
-                        aria-selected="true"
-                      >
+                      <a class="nav-link active" id="active-tab" data-bs-toggle="tab" href="#english" role="tab"
+                        aria-controls="active" aria-expanded="true" aria-selected="true">
                         <span>English</span>
                       </a>
                     </li>
                     <li class="nav-item" role="presentation">
-                      <a
-                        class="nav-link"
-                        id="link1-tab"
-                        data-bs-toggle="tab"
-                        href="#arabic"
-                        role="tab"
-                        aria-controls="link1"
-                        aria-selected="false"
-                        tabindex="-1"
-                      >
+                      <a class="nav-link" id="link1-tab" data-bs-toggle="tab" href="#arabic" role="tab"
+                        aria-controls="link1" aria-selected="false" tabindex="-1">
                         <span>Arabic</span>
                       </a>
                     </li>
                   </ul>
-                  <div
-                    class="tab-content tabcontent-border py-3"
-                    id="myTabContent"
-                  >
-                    <div
-                      role="tabpanel"
-                      class="tab-pane fade active show"
-                      id="english"
-                      aria-labelledby="active-tab"
-                    >
+                  <div class="tab-content tabcontent-border py-3" id="myTabContent">
+                    <div role="tabpanel" class="tab-pane fade active show" id="english" aria-labelledby="active-tab">
                       <div class="row">
                         <form class="mt-4 col-12 row" novalidate="">
                           <div class="mb-3 form-group col-12">
@@ -295,15 +203,8 @@
                               <span class="text-danger">*</span>
                             </label>
                             <div class="controls">
-                              <input
-                                v-model="data.nameEn"
-                                type="text"
-                                name="text"
-                                class="form-control"
-                                required=""
-                                data-validation-required-message="This field is required"
-                                aria-invalid="false"
-                              />
+                              <input v-model="data.nameEn" type="text" name="text" class="form-control" required=""
+                                data-validation-required-message="This field is required" aria-invalid="false" />
                               <div class="help-block"></div>
                             </div>
                           </div>
@@ -313,25 +214,16 @@
                               <span class="text-danger">*</span>
                             </label>
                             <div class="controls">
-                              <textarea
-                                v-model="data.descriptionEn"
-                                class="form-control"
-                                required=""
+                              <textarea v-model="data.descriptionEn" class="form-control" required=""
                                 data-validation-required-message="This field is required"
-                                aria-invalid="false"
-                              ></textarea>
+                                aria-invalid="false"></textarea>
                               <div class="help-block"></div>
                             </div>
                           </div>
                         </form>
                       </div>
                     </div>
-                    <div
-                      class="tab-pane fade"
-                      id="arabic"
-                      role="tabpanel"
-                      aria-labelledby="link1-tab"
-                    >
+                    <div class="tab-pane fade" id="arabic" role="tabpanel" aria-labelledby="link1-tab">
                       <form class="mt-4 col-12 row" novalidate="">
                         <div class="mb-3 form-group col-12">
                           <label>
@@ -339,15 +231,8 @@
                             <span class="text-danger">*</span>
                           </label>
                           <div class="controls">
-                            <input
-                              v-model="data.nameAr"
-                              type="text"
-                              name="text"
-                              class="form-control"
-                              required=""
-                              data-validation-required-message="This field is required"
-                              aria-invalid="false"
-                            />
+                            <input v-model="data.nameAr" type="text" name="text" class="form-control" required=""
+                              data-validation-required-message="This field is required" aria-invalid="false" />
                             <div class="help-block"></div>
                           </div>
                         </div>
@@ -357,13 +242,8 @@
                             <span class="text-danger">*</span>
                           </label>
                           <div class="controls">
-                            <textarea
-                              v-model="data.descriptionAr"
-                              class="form-control"
-                              required=""
-                              data-validation-required-message="This field is required"
-                              aria-invalid="false"
-                            ></textarea>
+                            <textarea v-model="data.descriptionAr" class="form-control" required=""
+                              data-validation-required-message="This field is required" aria-invalid="false"></textarea>
                             <div class="help-block"></div>
                           </div>
                         </div>
@@ -374,17 +254,28 @@
                     <div class="mb-3 form-group col-6">
                       <label>Country <span class="text-danger">*</span></label>
                       <div class="controls">
-                        <select
-                          v-model="data.countryId"
-                          name="select"
-                          id="select"
-                          required=""
-                          class="form-control"
-                          aria-invalid="false"
-                        >
+                        <select v-model="data.countryId" name="select" id="select" required="" class="form-control"
+                          aria-invalid="false">
                           <option value="">Select Country</option>
                           <option value="13">Algeria</option>
                           <option value="2">Jordan</option>
+                          <option value="3">Bahrain</option>
+                          <option value="4">Egypt</option>
+                          <option value="5">Iraq</option>
+                          <option value="6">Kuwait</option>
+                          <option value="7">Lebanon</option>
+                          <option value="8">Libya</option>
+                          <option value="9">Morocco</option>
+                          <option value="10">Oman</option>
+                          <option value="11">Palestine</option>
+                          <option value="12">Qatar</option>
+                          <option value="14">Saudi Arabia</option>
+                          <option value="15">Sudan</option>
+                          <option value="16">Syria</option>
+                          <option value="17">Tunisia</option>
+                          <option value="18">United Arab Emirates</option>
+                          <option value="19">Yemen</option>
+
                         </select>
                         <div class="help-block"></div>
                       </div>
@@ -392,14 +283,8 @@
                     <div class="mb-3 form-group col-6">
                       <label>Status <span class="text-danger">*</span></label>
                       <div class="controls">
-                        <select
-                          v-model="data.isActive"
-                          name="select"
-                          id="select"
-                          required=""
-                          class="form-control"
-                          aria-invalid="false"
-                        >
+                        <select v-model="data.isActive" name="select" id="select" required="" class="form-control"
+                          aria-invalid="false">
                           <option value="">Select Status</option>
                           <option value="1">Active</option>
                           <option value="0">Inactive</option>
@@ -408,18 +293,10 @@
                       </div>
                     </div>
                     <div class="mb-3 form-group col-6">
-                      <label
-                        >Working Hours <span class="text-danger">*</span></label
-                      >
+                      <label>Working Hours <span class="text-danger">*</span></label>
                       <div class="controls">
-                        <select
-                          v-model="data.operationHours"
-                          name="select"
-                          id="select"
-                          required=""
-                          class="form-control"
-                          aria-invalid="false"
-                        >
+                        <select v-model="data.operationHours" name="select" id="select" required="" class="form-control"
+                          aria-invalid="false">
                           <option value="">Select Wokring Hours</option>
                           <option selected value="1">1</option>
                           <option value="8">2</option>
@@ -432,17 +309,10 @@
               </div>
             </div>
             <div class="modal-footer">
-              <button
-                id=""
-                @click="submit()"
-                class="btn btn-success rounded-pill px-4"
-              >
+              <button id="" @click="submit()" class="btn btn-success rounded-pill px-4">
                 Add
               </button>
-              <button
-                class="btn btn-danger rounded-pill px-4"
-                data-bs-dismiss="modal"
-              >
+              <button class="btn btn-danger rounded-pill px-4" data-bs-dismiss="modal">
                 Discard
               </button>
             </div>
@@ -673,7 +543,7 @@ export default {
   position: relative;
 }
 
-.upload-prescription > p {
+.upload-prescription>p {
   font-size: 27px;
   font-family: Poppins-Medium;
   color: #171717;
