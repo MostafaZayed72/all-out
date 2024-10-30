@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/ar/services/list", {data:[{_img:{}}],fetch:{},mutations:void 0});

@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/notifications/send", {data:[{_img:{}}],fetch:{},mutations:void 0});

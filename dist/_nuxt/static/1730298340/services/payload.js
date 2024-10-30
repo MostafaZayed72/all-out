@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/services", (function(a){return {data:[{id:a,_img:{}}],fetch:{},mutations:a}}(void 0)));

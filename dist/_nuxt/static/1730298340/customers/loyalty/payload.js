@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/customers/loyalty", {data:[{_img:{}}],fetch:{},mutations:void 0});

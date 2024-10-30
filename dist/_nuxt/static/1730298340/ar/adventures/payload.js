@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/ar/adventures", {data:[{_img:{}}],fetch:{},mutations:void 0});

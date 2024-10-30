@@ -1,0 +1,1 @@
+__NUXT_JSONP__("/ar/chatbot-requests", {data:[{_img:{}}],fetch:{},mutations:void 0});
