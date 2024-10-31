@@ -247,46 +247,46 @@ export default {
    
   },
  
-  auth: {
-    redirect: {
-      login: '/login',
-      logout: '/login',
-      home: '/'
-    },
-    strategies: {
-      local: {
-        scheme: 'refresh',
-        localStorage: {
-          prefix: 'auth.'
-        },
-        token: {
-          data: 'access_token',
-          property: 'access_token',
-          maxAge: 60 * 60 * 24 * 30,
-          // global: true,
-          // type: 'Bearer'
-        },
-        refreshToken: {
-          prefix: 'refresh_token.',
-          property: 'refresh_token',
-          data: 'refresh_token',
-          maxAge: 60 * 60 * 4 * 5
-        },
-        user: {
-          property: 'user',
-          autoFetch: false
-        },
-        endpoints: {
-          login: { url: '/branch/api/master-admins/login', method: 'post' },
-          refresh: { url: '/branch/api/master-admins/refresh/?format=web', method: 'post' },
-          user: false,
-          logout: { url: '/branch/api/master-admins/logout', method: 'post' }
-        },
-        tokenRequired: true,
-        tokenType: 'JWT',
-      }
-    }
-  },
+  // auth: {
+  //   redirect: {
+  //     login: '/login',
+  //     logout: '/login',
+  //     home: '/'
+  //   },
+  //   strategies: {
+  //     local: {
+  //       scheme: 'refresh',
+  //       localStorage: {
+  //         prefix: 'auth.'
+  //       },
+  //       token: {
+  //         data: 'access_token',
+  //         property: 'access_token',
+  //         maxAge: 60 * 60 * 24 * 30,
+  //         // global: true,
+  //         // type: 'Bearer'
+  //       },
+  //       refreshToken: {
+  //         prefix: 'refresh_token.',
+  //         property: 'refresh_token',
+  //         data: 'refresh_token',
+  //         maxAge: 60 * 60 * 4 * 5
+  //       },
+  //       user: {
+  //         property: 'user',
+  //         autoFetch: false
+  //       },
+  //       endpoints: {
+  //         login: { url: '/branch/api/master-admins/login', method: 'post' },
+  //         refresh: { url: '/branch/api/master-admins/refresh/?format=web', method: 'post' },
+  //         user: false,
+  //         logout: { url: '/branch/api/master-admins/logout', method: 'post' }
+  //       },
+  //       tokenRequired: true,
+  //       tokenType: 'JWT',
+  //     }
+  //   }
+  // },
   server:{
     host: "0.0.0.0"
   }
