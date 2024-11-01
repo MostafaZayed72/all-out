@@ -155,7 +155,7 @@ export default {
           let data = JSON.stringify(response.response.data);
           localStorage.setItem("data", data);
           localStorage.setItem("loggedIn", true);
-          window.location.href = "/home";
+          window.location.href = "/vendors";
         }
       } catch (e) {
         console.error(e.message);
