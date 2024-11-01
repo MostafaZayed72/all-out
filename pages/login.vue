@@ -56,7 +56,7 @@
         <div class="col-xl-5 col-xxl-4 d-flex justify-content-center align-items-center">
           <div class="authentication-login w-100 p-4 bg-white shadow rounded">
             <div class="text-center mb-5">
-              <h2 class="fw-bold mb-2">Welcome to ALL OUT FZC-LLC</h2>
+              <h2 class="fw-bold mb-2">Welcome to ALL OUT FZC-LLC / / /</h2>
               <p class="text-muted mb-4">Your Admin Dashboard</p>
             </div>
 
