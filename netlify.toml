@@ -4,10 +4,10 @@ publish=".nuxt/dist/client"
 command="CI= npm run build"
 [[redirects]]
   from = "/base/*"
-  to = "http://143.198.103.113:8086/service/:splat"
+  to = "http://185.192.97.21:8086/service/:splat"
   status = 200
 
 [[redirects]]
   from = "/branch/*"
-  to = "http://143.198.103.113:8086/main/:splat"
+  to = "http://185.192.97.21:8086/main/:splat"
   status = 200
