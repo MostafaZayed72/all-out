@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/ar/payments/list", {data:[{_img:{}}],fetch:{},mutations:void 0});

@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/fr/settings/banner", {data:[{_img:{}}],fetch:{},mutations:void 0});

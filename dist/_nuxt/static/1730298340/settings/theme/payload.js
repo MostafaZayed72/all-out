@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/settings/theme", {data:[{_img:{}}],fetch:{},mutations:void 0});

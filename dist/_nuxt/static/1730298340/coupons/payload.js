@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/coupons", {data:[{_img:{}}],fetch:{},mutations:void 0});

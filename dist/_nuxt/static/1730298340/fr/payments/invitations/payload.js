@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/fr/payments/invitations", {data:[{_img:{}}],fetch:{},mutations:void 0});

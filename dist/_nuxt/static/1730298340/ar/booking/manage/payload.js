@@ -1,1 +1,0 @@
-__NUXT_JSONP__("/ar/booking/manage", {data:[{_img:{}}],fetch:{},mutations:void 0});
