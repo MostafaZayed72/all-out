@@ -12,4 +12,3 @@ MODE_ENV=development
 APP_DEBUG=false
 BITWAVE_ENV=production
 WORKBOX_DEBUG=true
-t
